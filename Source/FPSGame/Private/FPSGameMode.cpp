@@ -4,6 +4,7 @@
 #include "FPSHUD.h"
 #include "FPSCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
 
 AFPSGameMode::AFPSGameMode()
 {
@@ -13,4 +14,33 @@ AFPSGameMode::AFPSGameMode()
 
 	// use our custom HUD class
 	HUDClass = AFPSHUD::StaticClass();
+}
+
+void AFPSGameMode::CompleteMission(APawn* InstigatorPawn)
+{
+	if (InstigatorPawn)
+	{
+		InstigatorPawn->DisableInput(nullptr);
+
+		if (SpectatingViewpoint)
+		{
+			APlayerController* PlayerController = Cast<APlayerController>(InstigatorPawn->GetController());
+
+			if (PlayerController) {
+				TArray<AActor*> SpectatingViewpoints;
+				UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpoint, SpectatingViewpoints);
+
+				if (SpectatingViewpoints.Num() > 0)
+				{
+					PlayerController->SetViewTargetWithBlend(SpectatingViewpoints[0], 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+				}
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Log, TEXT("No spectating viewpoint defined, can't set new viewport in FPSGameMode!"));
+		}
+	}
+
+	OnMissionCompleted(InstigatorPawn);
 }
