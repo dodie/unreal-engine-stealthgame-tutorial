@@ -3,6 +3,8 @@
 #include "FPSGameMode.h"
 #include "FPSHUD.h"
 #include "FPSCharacter.h"
+#include "FPSPlayerController.h"
+#include "FPSGameState.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -14,32 +16,54 @@ AFPSGameMode::AFPSGameMode()
 
 	// use our custom HUD class
 	HUDClass = AFPSHUD::StaticClass();
+
+	GameStateClass = AFPSGameState::StaticClass();
 }
 
 void AFPSGameMode::CompleteMission(APawn* InstigatorPawn, bool bSuccess)
 {
 	if (InstigatorPawn)
 	{
-		InstigatorPawn->DisableInput(nullptr);
-
 		if (SpectatingViewpoint)
 		{
+			TArray<AActor*> SpectatingViewpoints;
+			UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpoint, SpectatingViewpoints);
+
+			if (SpectatingViewpoints.Num() > 0)
+			{
+				for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
+				{
+					AFPSPlayerController* PlayerController = Cast<AFPSPlayerController>(It->Get());
+					if (PlayerController)
+					{
+						PlayerController->SetViewTargetWithBlend(SpectatingViewpoints[0], 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+					}
+				}
+			}
+			
+
+			/*
 			APlayerController* PlayerController = Cast<APlayerController>(InstigatorPawn->GetController());
 
 			if (PlayerController) {
-				TArray<AActor*> SpectatingViewpoints;
-				UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpoint, SpectatingViewpoints);
+				
 
 				if (SpectatingViewpoints.Num() > 0)
 				{
 					PlayerController->SetViewTargetWithBlend(SpectatingViewpoints[0], 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
 				}
-			}
+			}*/
 		}
 		else
 		{
 			UE_LOG(LogTemp, Log, TEXT("No spectating viewpoint defined, can't set new viewport in FPSGameMode!"));
 		}
+	}
+
+	AFPSGameState* GameState = GetGameState<AFPSGameState>();
+	if (GameState)
+	{
+		GameState->MulticastOnMissionComplete(InstigatorPawn, bSuccess);
 	}
 
 	OnMissionCompleted(InstigatorPawn, bSuccess);
