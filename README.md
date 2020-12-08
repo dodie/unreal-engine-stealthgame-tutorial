@@ -4,6 +4,8 @@ Based on the course[Unreal Engine 4 Mastery: Create Multiplayer Games with C++](
 
 By default, the game works in single player mode, and can be used in multiplayer mode.
 
+![Game](https://raw.githubusercontent.com/dodie/unreal-engine-stealthgame-tutorial/dodi/game.jpg "Game")
+
 
 # Usage
 
