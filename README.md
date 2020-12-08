@@ -21,7 +21,7 @@ Rules:
 
 - Open console with `F12`
 - Issue commands similar to the following examples, where the letter following the resolution is a **fullscreen** or **windowed** mode: `r.SetRes 600x400f`, `r.SetRes 600x400w`.
-
+- Check FPS with `stat fps`
 
 ## Multiplayer mode
 
