@@ -1,6 +1,6 @@
 # Unreal Engine Stealth Game Tutorial
 
-Based on the course[Unreal Engine 4 Mastery: Create Multiplayer Games with C++](https://www.udemy.com/course/unrealengine-cpp/) by Tom Looman, forked from https://github.com/tomlooman/SimpleFPSTemplate.
+Based on the course [Unreal Engine 4 Mastery: Create Multiplayer Games with C++](https://www.udemy.com/course/unrealengine-cpp/) by Tom Looman, forked from https://github.com/tomlooman/SimpleFPSTemplate.
 
 By default, the game works in single player mode, and can be used in multiplayer mode.
 
