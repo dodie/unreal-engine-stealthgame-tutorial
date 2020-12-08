@@ -5,9 +5,9 @@ Based on the course[Unreal Engine 4 Mastery: Create Multiplayer Games with C++](
 
 # Usage
 
-Download release, start it on Win64.
+Download the [release](https://github.com/dodie/unreal-engine-stealthgame-tutorial/releases/), extraxt, start it on Win64.
 
-Start game exe, have fun. Rules:
+Rules:
 
 - **Move around** with WASD/Space. **Avoid guards.** If they see anybodyin the team, mission is failed. Try to **grab the objective and escort it to the extraction zone**.
 - Shoot with the mouse to launch bombs distract the guards. 
