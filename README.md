@@ -9,12 +9,13 @@ By default, the game works in single player mode, and can be used in multiplayer
 
 # Usage
 
-Download the [release](https://github.com/dodie/unreal-engine-stealthgame-tutorial/releases/), extraxt, start it on Win64.
+Download the [release](https://github.com/dodie/unreal-engine-stealthgame-tutorial/releases/), extract, start exe it on Win64, have fun.
 
 Rules:
 
 - **Move around** with WASD/Space. **Avoid guards.** If they see anybodyin the team, mission is failed. Try to **grab the objective and escort it to the extraction zone**.
 - Shoot with the mouse to launch bombs distract the guards. 
+
 
 ## Change resolution
 
