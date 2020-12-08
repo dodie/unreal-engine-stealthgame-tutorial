@@ -29,6 +29,11 @@ Rules:
 - Join with Client: `open <SERVER-IP>:7777` or `open <SERVER-IP>`
 
 
+# Development
+
+- Requires Unreal Engine 4.18.*
+
+
 # License
 
 This project is licensed under the Unreal Engine 4 EULA.
